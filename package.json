@@ -1,0 +1,27 @@
+{
+  "name": "ffv2-pro-access",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FFV2 PRO — subscription & license access center for the FFV2 mobile game (manual bKash verification, Turso-backed entitlements).",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace web",
+    "start": "node server/index.js",
+    "dev:server": "node --watch server/index.js",
+    "dev:web": "npm run dev --workspace web",
+    "smoke": "node server/scripts/smoke.js"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.1"
+  }
+}

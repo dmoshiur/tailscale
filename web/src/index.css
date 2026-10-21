@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-ink text-slate-200 font-display antialiased;
+    background-image:
+      radial-gradient(900px 500px at 12% -10%, rgba(34, 233, 255, 0.12), transparent 60%),
+      radial-gradient(800px 480px at 92% 8%, rgba(255, 45, 85, 0.1), transparent 62%);
+    background-repeat: no-repeat;
+  }
+
+  ::selection {
+    background: rgba(34, 233, 255, 0.28);
+    color: #ffffff;
+  }
+
+  /* Slim, cyber-ish scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(34, 233, 255, 0.32) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(34, 233, 255, 0.24);
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  /* ---------------------------------------------------------------- layout */
+  .shell {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 78%);
+  }
+
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply transition duration-300 hover:border-cyan/40 hover:bg-white/[0.055];
+  }
+
+  .hairline {
+    @apply border-t border-white/10;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-cyan/80;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-300;
+  }
+
+  /* --------------------------------------------------------------- buttons */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-cyan text-ink shadow-glowCyan hover:brightness-110 active:scale-[0.99];
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/[0.04] text-slate-100 hover:border-cyan/40 hover:bg-white/[0.08];
+  }
+
+  .btn-danger {
+    @apply btn bg-crimson text-white hover:brightness-110;
+  }
+
+  .btn-bkash {
+    @apply btn w-full bg-bkash text-white shadow-[0_10px_30px_-10px_rgba(209,32,83,0.9)] hover:brightness-110 active:scale-[0.995];
+  }
+
+  /* ---------------------------------------------------------------- inputs */
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 font-mono text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan/60 focus:outline-none focus:ring-2 focus:ring-cyan/20;
+  }
+
+  .field-light {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 focus:border-bkash focus:outline-none focus:ring-2 focus:ring-bkash/20;
+  }
+
+  .label {
+    @apply mb-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400;
+  }
+
+  .label-light {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-500;
+  }
+
+  /* ------------------------------------------------------------- terminal */
+  .term {
+    @apply rounded-xl border border-matrix/20 bg-black/80 p-4 font-mono text-[12.5px] leading-relaxed text-matrix/90;
+  }
+
+  .term-line {
+    @apply whitespace-pre-wrap break-words;
+  }
+
+  .kbd {
+    @apply rounded border border-white/15 bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-slate-300;
+  }
+
+  .divider-dot {
+    @apply h-1 w-1 rounded-full bg-slate-600;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+}

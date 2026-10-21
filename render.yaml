@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ffv2-pro-access
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      - key: ADMIN_SECRET
+        sync: false
+      - key: BKASH_MERCHANT_NUMBER
+        sync: false
+      - key: BKASH_MERCHANT_NAME
+        value: FFV2 PRO
+      - key: SUPPORT_CONTACT
+        value: "@ffv2pro"
+      - key: CORS_ORIGINS
+        sync: false

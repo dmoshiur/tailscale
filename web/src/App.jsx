@@ -3,6 +3,7 @@ import Landing from './components/Landing.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import BkashCheckout from './components/BkashCheckout.jsx';
 import ActivateModal from './components/ActivateModal.jsx';
+import RedeemSuccessModal from './components/RedeemSuccessModal.jsx';
 import { Logo, IconRefresh } from './components/Icons.jsx';
 import { api } from './lib/api.js';
 import {
@@ -37,6 +38,9 @@ export default function App() {
   const [activateOpen, setActivateOpen] = useState(false);
   const [activateNotice, setActivateNotice] = useState('');
   const [pending, setPending] = useState(null);
+  // { entitlement, key } once a redeem/purchase succeeds — drives the big
+  // tap-to-copy confirmation popup. Holds only the player's own key.
+  const [redeemSuccess, setRedeemSuccess] = useState(null);
 
   /* ---------------------------------------------------------------- */
   /* Boot: load public config, then verify any cached session.         */
@@ -138,6 +142,9 @@ export default function App() {
     closeCheckout();
     if (session) {
       setView('dashboard');
+      // Same big redeem confirmation as manual activation: the buyer's own
+      // licence key, large and copyable, on top of the dashboard.
+      setRedeemSuccess(session);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
@@ -151,6 +158,7 @@ export default function App() {
     saveSession(next);
     setActivateOpen(false);
     setView('dashboard');
+    setRedeemSuccess(next);
     window.scrollTo({ top: 0 });
   }
 
@@ -159,6 +167,7 @@ export default function App() {
     setSession(null);
     setView('landing');
     setActivateNotice('');
+    setRedeemSuccess(null);
   }
 
   /* ---------------------------------------------------------------- */
@@ -236,6 +245,13 @@ export default function App() {
         notice={activateNotice}
         onClose={() => setActivateOpen(false)}
         onActivated={handleActivated}
+      />
+
+      <RedeemSuccessModal
+        open={!!redeemSuccess}
+        entitlement={redeemSuccess?.entitlement}
+        licenseKey={redeemSuccess?.key ?? ''}
+        onClose={() => setRedeemSuccess(null)}
       />
     </>
   );

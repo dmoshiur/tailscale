@@ -86,6 +86,11 @@ so a misconfigured deploy cannot issue free licences.
 5. The buyer's tab is polling `GET /api/orders/:id?claim=…` every 5s and flips to “verified”
    automatically, then activates the licence on that device.
 6. If they close the tab first, the order is kept in `localStorage` and a banner offers to resume.
+7. On any successful redeem/activation a large confirmation popup
+   (`web/src/components/RedeemSuccessModal.jsx`) shows the player's **own** licence key —
+   big, tap-to-copy, with plan/expiry/device info and the in-game steps. Per the scope note
+   above it never displays a Facebook login or any other third-party credential; the only
+   secret a player ever sees is the key the server issued to them.
 
 ### Confirming from CMD / Terminal
 

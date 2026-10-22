@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard.jsx';
 import BkashCheckout from './components/BkashCheckout.jsx';
 import ActivateModal from './components/ActivateModal.jsx';
 import RedeemSuccessModal from './components/RedeemSuccessModal.jsx';
+import VipUnlockModal from './components/VipUnlockModal.jsx';
 import { Logo, IconRefresh } from './components/Icons.jsx';
 import { api } from './lib/api.js';
 import {
@@ -252,6 +253,13 @@ export default function App() {
         entitlement={redeemSuccess?.entitlement}
         licenseKey={redeemSuccess?.key ?? ''}
         onClose={() => setRedeemSuccess(null)}
+      />
+
+      {/* VIP card — opens when the dashboard terminal handshake completes,
+          and is restored from localStorage on refresh. */}
+      <VipUnlockModal
+        active={!!session?.entitlement}
+        entitlement={session?.entitlement}
       />
     </>
   );

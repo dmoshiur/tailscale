@@ -16,6 +16,7 @@ import {
 } from './Icons.jsx';
 import { api } from '../lib/api.js';
 import { getDeviceId } from '../lib/store.js';
+import { announceVipUnlock } from '../lib/vipUnlock.js';
 import { daysLeft, formatDate, formatDateTime, maskKey } from '../lib/format.js';
 
 /* ------------------------------------------------------------------ */
@@ -302,6 +303,8 @@ function SessionRunner({ entitlement, notify }) {
     await sleep(500);
     if (cancelled.current) return;
     setPhase('complete');
+    // Unlock is finalised here — persist the receipt and open the VIP card.
+    announceVipUnlock();
     notify?.('Session initialised — PRO access is live.');
   }
 
